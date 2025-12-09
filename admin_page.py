@@ -3,9 +3,9 @@ import pandas as pd
 from data_loader import load_cases, save_cases
 
 def admin_page():
-    st.subheader("🔐 Halaman Admin – Manajemen Kasus")
+    st.subheader("Halaman Admin – Manajemen Kasus")
 
-    # Password sederhana (bisa diganti)
+  
     password = st.text_input("Password Admin", type="password")
     if password != "admin123":
         st.warning("Masukkan password admin")
@@ -16,7 +16,7 @@ def admin_page():
     st.write("### Data Kasus Saat Ini")
     st.dataframe(df, use_container_width=True)
 
-    st.write("### ➕ Tambah / ✏️ Edit Kasus")
+    st.write("### Menambah / Edit Kasus")
 
     with st.form("form_kasus"):
         cols = df.columns.tolist()
@@ -43,18 +43,18 @@ def admin_page():
 
         if new_data["id"] in df["id"].values:
             df.loc[df["id"] == new_data["id"], :] = new_data
-            st.success("✅ Kasus berhasil DIUPDATE")
+            st.success("Kasus berhasil DIUPDATE")
         else:
             df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
-            st.success("✅ Kasus berhasil DITAMBAHKAN")
+            st.success("Kasus berhasil DITAMBAHKAN")
 
         save_cases(df)
         st.rerun()
 
-    st.write("### ❌ Hapus Kasus")
+    st.write("### Hapus Kasus")
     delete_id = st.number_input("Masukkan ID yang akan dihapus", min_value=1, step=1)
     if st.button("Hapus"):
         df = df[df["id"] != delete_id]
         save_cases(df)
-        st.success("🗑️ Kasus berhasil dihapus")
+        st.success("Kasus berhasil dihapus")
         st.rerun()
