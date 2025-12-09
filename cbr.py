@@ -1,16 +1,3 @@
-"""
-cbr.py - Simple Case-Based Reasoning engine for skin problem recommendations.
-
-Assumptions:
-- Dataset is a CSV file with columns:
-  'id', 'age', 'gender', 'skin_type', {symptom_columns}, 'solution'
-- Symptom columns are binary (0/1).
-- The engine computes similarity between a query and stored cases using:
-  - symptom similarity (Jaccard on present symptoms)
-  - skin_type match
-  - gender match
-  - age proximity
-"""
 from typing import List, Dict, Any
 import pandas as pd
 import numpy as np
